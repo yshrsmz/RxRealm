@@ -31,5 +31,6 @@ dependencies {
     androidTestCompile 'com.android.support.test:rules:0.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
     androidTestCompile 'org.hamcrest:hamcrest-library:1.1'
-    
+    androidTestCompile 'org.assertj:assertj-core:1.7.0'
+
 }
