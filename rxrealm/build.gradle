@@ -21,6 +21,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
 dependencies {
@@ -33,4 +36,12 @@ dependencies {
     androidTestCompile 'org.hamcrest:hamcrest-library:1.1'
     androidTestCompile 'org.assertj:assertj-core:1.7.0'
 
+}
+
+// from https://github.com/chrisbanes/gradle-mvn-push
+apply from: 'gradle-mvn-push.gradle'
+
+afterEvaluate {
+    androidJavadocs.classpath +=
+            project.android.libraryVariants.toList().first().javaCompile.classpath
 }
