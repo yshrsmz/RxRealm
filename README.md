@@ -11,3 +11,14 @@ Please refer to his [blog post](http://kboyarshinov.com/android/wrapping-realm-a
 
 # Installation
 
+AAR is distributed on the Maven Central repository.
+
+```
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'net.yslibrary.rxrealm:rxrealm:1.0.0-SNAPSHOT'
+}
+```
