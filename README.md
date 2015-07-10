@@ -19,6 +19,6 @@ repositories {
 }
 
 dependencies {
-    compile 'net.yslibrary.rxrealm:rxrealm:1.0.0-SNAPSHOT'
+    compile 'net.yslibrary.rxrealm:rxrealm:1.1.0T'
 }
 ```
