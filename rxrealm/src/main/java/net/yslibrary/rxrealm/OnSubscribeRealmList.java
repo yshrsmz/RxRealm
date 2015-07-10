@@ -1,8 +1,7 @@
 package net.yslibrary.rxrealm;
 
-import android.content.Context;
-
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.exceptions.RealmException;
@@ -17,23 +16,20 @@ import rx.subscriptions.Subscriptions;
 public abstract class OnSubscribeRealmList<T extends RealmObject>
         implements Observable.OnSubscribe<RealmList<T>> {
 
-    private Context mContext;
+    private RealmConfiguration mRealmConfig;
 
-    private String mDbName;
-
-    public OnSubscribeRealmList(Context context) {
-        this(context, null);
+    public OnSubscribeRealmList() {
+        this(null);
     }
 
-    public OnSubscribeRealmList(Context context, String dbName) {
-        mContext = context;
-        mDbName = dbName;
+    public OnSubscribeRealmList(RealmConfiguration realmConfig) {
+        mRealmConfig = realmConfig;
     }
 
     @Override
     public void call(final Subscriber<? super RealmList<T>> subscriber) {
-        final Realm realm = mDbName != null ?
-                Realm.getInstance(mContext, mDbName) : Realm.getInstance(mContext);
+        final Realm realm = mRealmConfig != null ?
+                Realm.getInstance(mRealmConfig) : Realm.getDefaultInstance();
 
         subscriber.add(Subscriptions.create(new Action0() {
             @Override

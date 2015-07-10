@@ -1,8 +1,7 @@
 package net.yslibrary.rxrealm;
 
-import android.content.Context;
-
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
@@ -18,10 +17,9 @@ public class RealmObservable {
         // empty private constructor
     }
 
-    public static <T extends RealmObject> Observable<T> object(Context context,
-            final Func1<Realm, T> function) {
+    public static <T extends RealmObject> Observable<T> object(final Func1<Realm, T> function) {
 
-        return Observable.create(new OnSubscribeRealm<T>(context) {
+        return Observable.create(new OnSubscribeRealm<T>() {
             @Override
             public T get(Realm realm) {
                 return function.call(realm);
@@ -29,10 +27,10 @@ public class RealmObservable {
         });
     }
 
-    public static <T extends RealmObject> Observable<T> object(Context context, String dbName,
+    public static <T extends RealmObject> Observable<T> object(RealmConfiguration realmConfig,
             final Func1<Realm, T> function) {
 
-        return Observable.create(new OnSubscribeRealm<T>(context, dbName) {
+        return Observable.create(new OnSubscribeRealm<T>(realmConfig) {
             @Override
             public T get(Realm realm) {
                 return function.call(realm);
@@ -40,10 +38,10 @@ public class RealmObservable {
         });
     }
 
-    public static <T extends RealmObject> Observable<RealmList<T>> list(Context context,
+    public static <T extends RealmObject> Observable<RealmList<T>> list(
             final Func1<Realm, RealmList<T>> function) {
 
-        return Observable.create(new OnSubscribeRealmList<T>(context) {
+        return Observable.create(new OnSubscribeRealmList<T>() {
             @Override
             public RealmList<T> get(Realm realm) {
                 return function.call(realm);
@@ -51,10 +49,10 @@ public class RealmObservable {
         });
     }
 
-    public static <T extends RealmObject> Observable<RealmList<T>> list(Context context,
-            String dbName, final Func1<Realm, RealmList<T>> function) {
+    public static <T extends RealmObject> Observable<RealmList<T>> list(
+            RealmConfiguration realmConfig, final Func1<Realm, RealmList<T>> function) {
 
-        return Observable.create(new OnSubscribeRealmList<T>(context, dbName) {
+        return Observable.create(new OnSubscribeRealmList<T>(realmConfig) {
             @Override
             public RealmList<T> get(Realm realm) {
                 return function.call(realm);
@@ -62,10 +60,10 @@ public class RealmObservable {
         });
     }
 
-    public static <T extends RealmObject> Observable<RealmResults<T>> results(Context context,
+    public static <T extends RealmObject> Observable<RealmResults<T>> results(
             final Func1<Realm, RealmResults<T>> function) {
 
-        return Observable.create(new OnSubscribeRealmResults<T>(context) {
+        return Observable.create(new OnSubscribeRealmResults<T>() {
             @Override
             public RealmResults<T> get(Realm realm) {
                 return function.call(realm);
@@ -73,10 +71,10 @@ public class RealmObservable {
         });
     }
 
-    public static <T extends RealmObject> Observable<RealmResults<T>> results(Context context,
-            String dbName, final Func1<Realm, RealmResults<T>> function) {
+    public static <T extends RealmObject> Observable<RealmResults<T>> results(
+            RealmConfiguration realmConfig, final Func1<Realm, RealmResults<T>> function) {
 
-        return Observable.create(new OnSubscribeRealmResults<T>(context, dbName) {
+        return Observable.create(new OnSubscribeRealmResults<T>(realmConfig) {
             @Override
             public RealmResults<T> get(Realm realm) {
                 return function.call(realm);

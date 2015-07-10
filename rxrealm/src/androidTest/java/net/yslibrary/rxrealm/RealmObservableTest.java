@@ -16,6 +16,7 @@ import android.support.test.runner.AndroidJUnit4;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -32,7 +33,7 @@ public class RealmObservableTest {
 
     private static final String REALM_NAME = "rxrealm.realm";
 
-    private Realm mRealm;
+    private RealmConfiguration mRealmConfig;
 
     @Before
     public void createRealm() {
@@ -40,12 +41,17 @@ public class RealmObservableTest {
         Realm.deleteRealmFile(context, REALM_NAME);
     }
 
+    @Before
+    public void setUp() {
+        Context context = InstrumentationRegistry.getTargetContext();
+        mRealmConfig = new RealmConfiguration.Builder(context)
+                .name(REALM_NAME).build();
+    }
+
     @Test
     public void RealmObservable_object() {
 
-        Context context = InstrumentationRegistry.getTargetContext();
-
-        PersonDto person = RealmObservable.object(context, REALM_NAME, new Func1<Realm, Person>() {
+        PersonDto person = RealmObservable.object(mRealmConfig, new Func1<Realm, Person>() {
             @Override
             public Person call(Realm realm) {
                 Person person = realm.createObject(Person.class);
@@ -86,10 +92,8 @@ public class RealmObservableTest {
     @Test
     public void RealmObservable_list() {
 
-        Context context = InstrumentationRegistry.getTargetContext();
-
         // setup
-        RealmObservable.object(context, REALM_NAME, new Func1<Realm, Person>() {
+        RealmObservable.object(mRealmConfig, new Func1<Realm, Person>() {
             @Override
             public Person call(Realm realm) {
                 Person person = realm.createObject(Person.class);
@@ -127,7 +131,7 @@ public class RealmObservableTest {
         }).toBlocking().first();
 
         // test
-        List<HobbyDto> hobbies = RealmObservable.list(context, REALM_NAME,
+        List<HobbyDto> hobbies = RealmObservable.list(mRealmConfig,
                 new Func1<Realm, RealmList<Hobby>>() {
                     @Override
                     public RealmList<Hobby> call(Realm realm) {
@@ -155,10 +159,9 @@ public class RealmObservableTest {
 
     @Test
     public void RealmObservable_results() {
-        Context context = InstrumentationRegistry.getTargetContext();
 
         // setup
-        RealmObservable.object(context, REALM_NAME, new Func1<Realm, Person>() {
+        RealmObservable.object(mRealmConfig, new Func1<Realm, Person>() {
             @Override
             public Person call(Realm realm) {
                 Person person = realm.createObject(Person.class);
@@ -195,7 +198,7 @@ public class RealmObservableTest {
             }
         }).toBlocking().first();
 
-        List<PersonDto> people = RealmObservable.results(context, REALM_NAME,
+        List<PersonDto> people = RealmObservable.results(mRealmConfig,
                 new Func1<Realm, RealmResults<Person>>() {
                     @Override
                     public RealmResults<Person> call(Realm realm) {
