@@ -1,6 +1,14 @@
 Change Log
 ===
 
+Version 1.2.0 *(2015-8-7)*
+--------------------------
+
+- NEW: Remove RxAndroid dependency(because I don't use RxAndroid feature).
+- NEW: Use RxJava(1.0.13) instead.
+- NEW: Updated to Realm 0.82.1
+- NEW: Add license information.
+
 Version 1.1.0 *(2015-7-10)*
 ---------------------------
 
