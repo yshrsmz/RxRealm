@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    compile 'io.reactivex:rxandroid:0.25.0'
+    compile 'io.reactivex:rxjava:1.0.13'
     compile 'io.realm:realm-android:0.81.1'
 
     androidTestCompile 'com.android.support.test:runner:0.2'
