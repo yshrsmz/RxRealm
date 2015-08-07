@@ -1,6 +1,8 @@
 RxRealm
 ===
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RxRealm-green.svg?style=flat)](https://android-arsenal.com/details/1/2254)
+
 Rx utility for Realm database
 
 This library is derived from [kboyarshinov/realm-rxjava-example](https://github.com/kboyarshinov/realm-rxjava-example).
@@ -19,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.yslibrary.rxrealm:rxrealm:1.1.0'
+    compile 'net.yslibrary.rxrealm:rxrealm:1.2.0'
 }
 ```
 
