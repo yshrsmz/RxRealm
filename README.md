@@ -1,3 +1,7 @@
+# !DEPRECATED!
+
+From v0.87.0, Realm supports RxJava! use it instead:)
+
 RxRealm
 ===
 
